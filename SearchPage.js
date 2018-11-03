@@ -5,11 +5,26 @@ import { StyleSheet, Text, TextInput, View, Button, ActivityIndicator, Image } f
 
 type Props = {};
 export default class SearchPage extends Component<Props> {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchString: 'london',
+    };
+  }
+
   static navigationOptions = {
     title: 'Property Finder',
   };
 
+  onSearchTextChanged = (event) => {
+    console.log('onSearchTextChanged');
+    this.setState({ searchString: event.nativeEvent.text });
+    console.log('Current: '+this.state.searchString+', Next: '+event.nativeEvent.text);
+  }
+
   render() {
+    console.log('SearchPage.render');
     return (
       <View style={styles.container}>
         <Text style={styles.description}>
@@ -22,6 +37,8 @@ export default class SearchPage extends Component<Props> {
           <TextInput
             underlineColorAndroid={'transparent'}
             style={styles.searchInput}
+            value={this.state.searchString}
+            onChange={this.onSearchTextChanged}
             placeholder='Search via name or postcode' />
           <Button
             onPress={() => {}}
